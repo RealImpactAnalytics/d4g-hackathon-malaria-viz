@@ -100,7 +100,30 @@ function parallelCoordinates(data) {
       if (row['County'].toLowerCase() == county.toLowerCase())
         return row;
     }
-    alert("Did not find data for county " + county);
+    alert("Did not find county " + county + " in dataset.");
+  }
+
+  function update_map_with_brush(brushed_data) {
+    counties = []
+    for (var i = 0; i < brushed_data.length; i++) {
+      row = brushed_data[i]
+      counties.push(row['County'])
+    }
+    var county_objects = d3.selectAll(".county")
+    var county_objects_selected = county_objects.filter(
+      function(d, i) {
+        county_index = d.properties.COUNTY.toUpperCase()
+        return counties.indexOf(county_index) != -1;
+      });
+    
+    var county_objects_not_selected = county_objects.filter(
+      function(d, i) {
+        county_index = d.properties.COUNTY.toUpperCase()
+        return counties.indexOf(county_index) == -1;
+      });
+
+    county_objects_selected.style('fill-opacity', 1);
+    county_objects_not_selected.style('fill-opacity', .7);
   }
 
   d3.json("data/Kenyan-Counties.geojson", function(json) {
@@ -110,6 +133,7 @@ function parallelCoordinates(data) {
       .enter()
       .append("path")
       .attr("d", path)
+      .attr("class", function(d) { return "county " + d.properties.COUNTY; })
       .style("fill", "steelblue")
       .on('mouseover', function(d, i) {
            var currentState = this;
@@ -121,10 +145,18 @@ function parallelCoordinates(data) {
            parcoords.highlight([row]);
        })
       .on('mouseout', function(d, i) {
-           d3.selectAll('path').style({'fill-opacity':.7});
+           d3.selectAll(".county").style({'fill-opacity':.7});
+           var parcoords_data = parcoords.brushed() || data;
            parcoords.unhighlight();
+           update_map_with_brush(parcoords_data);
       });
   });
+
+  // highlight map on brush
+  parcoords.on("brush", function(d) {
+    update_map_with_brush(d);
+  });
+
 
   /*
   // setting up grid
