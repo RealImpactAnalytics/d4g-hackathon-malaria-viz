@@ -52,7 +52,7 @@ var parcoords = d3.parcoords()("#example")
   .alpha(0.4)
   .mode("default")
   //.height(d3.max([document.body.clientHeight-326, 220]))
-  .height(400)
+  .height(350)
   .margin({
     top: 36,
     left: 0,
@@ -75,6 +75,56 @@ function parallelCoordinates(data) {
     .smoothness(0.15)
     .showControlPoints(false)
     .render()
+
+  var w = 600,
+      h = 600;
+  var projection = d3.geo.mercator()
+     .center([38, 1.5])
+     .scale(2050)
+     .translate([w / 2, h/ 2]);
+
+  //Define path generator
+  var path = d3.geo.path()
+                  .projection(projection);
+
+  //Create SVG element
+  var svg = d3.select("body")
+             .append("svg")
+             .attr("width", w)
+             .attr("height", h)
+             .attr("style", "display: block; margin: auto")
+
+  function get_data_for_county(county) {
+    for (var i = 0; i < data.length; i++) {
+      row = data[i]
+      if (row['County'].toLowerCase() == county.toLowerCase())
+        return row;
+    }
+    alert("Did not find data for county " + county);
+  }
+
+  d3.json("data/Kenyan-Counties.geojson", function(json) {
+
+    svg.selectAll("path")
+      .data(json.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .style("fill", "steelblue")
+      .on('mouseover', function(d, i) {
+           var currentState = this;
+           d3.select(this).style('fill-opacity', 1);
+           var parcoords_data = parcoords.brushed() || data;
+           console.log("Trying to get data of " + d.properties.COUNTY)
+           row = get_data_for_county(d.properties.COUNTY)
+           console.log("Got this : " + row)
+           parcoords.highlight([row]);
+       })
+      .on('mouseout', function(d, i) {
+           d3.selectAll('path').style({'fill-opacity':.7});
+           parcoords.unhighlight();
+      });
+  });
 
   /*
   // setting up grid
