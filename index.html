@@ -24,40 +24,42 @@ body, html {
   overflow: hidden;
   font-size: 12px;
 }
-#grid, #pager {
-  position: fixed;
-  width: 100%;
-}
-#grid {
-  bottom: 0;
-  height: 300px;
-}
-#pager {
-  bottom: 306px;
-  height: 20px;
-}
-.slick-row:hover {
-  font-weight: bold;
-  color: #069;
-}
 </style>
 <script src="lib/d3.min.js"></script>
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
+<script src="lib/sylvester.js"></script>
 <div id="example" class="parcoords" style="height:240px;"></div>
-<div id="grid"></div>
-<div id="pager"></div>
 <script>
+
+// County,Poverty Rate,Physicians Density,% That Slept Under a Bed Net,% That Had a Fever or Malaria,Heath Spending Per Person,Total Population,Number of Facilities,Adult (15+) HIV prevalence
+var dimensions = ['Poverty Rate',
+                  'Physicians Density',
+                  '% That Slept Under a Bed Net',
+                  '% That Had a Fever or Malaria',
+                  'Heath Spending Per Person',
+                  'Total Population',
+                  'Number of Facilities',
+                  'Adult (15+) HIV prevalence'];
+
+// linear color scale
+var blue_to_red = d3.scale.linear()
+  .domain([0.2, 0.4, 0.6])
+  .range(["blue", "grey", "red"])
+  .interpolate(d3.interpolateLab);
+
 var parcoords = d3.parcoords()("#example")
   .alpha(0.4)
-  .mode("queue") // progressive rendering
-  .height(d3.max([document.body.clientHeight-326, 220]))
+  .mode("default")
+  //.height(d3.max([document.body.clientHeight-326, 220]))
+  .height(400)
   .margin({
     top: 36,
     left: 0,
     right: 0,
     bottom: 16
-  });
+  })
+  .color(function(d) { return blue_to_red(d['% That Had a Fever or Malaria']); })
 
 // create chart from loaded data
 function parallelCoordinates(data) {
@@ -67,9 +69,14 @@ function parallelCoordinates(data) {
   parcoords
     .data(data)
     .render()
+    .dimensions(dimensions)
     .reorderable()
-    .brushMode("1D-axes");
+    .brushMode("1D-axes")
+    .smoothness(0.15)
+    .showControlPoints(false)
+    .render()
 
+  /*
   // setting up grid
   var column_keys = d3.keys(data[0]);
   var columns = column_keys.map(function(key,i) {
@@ -146,7 +153,7 @@ function parallelCoordinates(data) {
     dataView.setItems(data);
     dataView.endUpdate();
   };
-
+  */
 };
 
 function readTextFile(file)
