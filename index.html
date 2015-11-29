@@ -87,14 +87,14 @@ body {
 </div>
 <script>
 
-var dimensions = ['Poverty Rate',
+var dimensions = ['% That Had a Fever or Malaria',
+                  'Poverty Rate',
                   'Physicians Density',
                   '% That Slept Under a Bed Net',
-                  '% That Had a Fever or Malaria',
                   'Heath Spending Per Person',
-                  'Total Population',
                   'Number of Facilities',
-                  'Adult (15+) HIV prevalence'];
+                  'Adult (15+) HIV prevalence',
+                  'Total Population'];
 
 // linear color scale
 var blue_to_red = d3.scale.quantize()
@@ -108,7 +108,7 @@ var parcoords = d3.parcoords()("#parcoords")
   .height(350)  
   .margin({
     top: 70,
-    left: 20,
+    left: 25,
     right: 20,
     bottom: 16
   })
@@ -329,6 +329,6 @@ function loadData(file)
   rawFile.send(null);
 }
 
-loadData("data/D4G_MALARIA_EXPLORE_v1.csv");
+loadData("data/d4g_malaria_explore.csv");
 
 </script>
