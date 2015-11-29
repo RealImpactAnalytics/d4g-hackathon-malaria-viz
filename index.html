@@ -1,5 +1,5 @@
 <!doctype html>
-<title>Linking to SlickGrid</title>
+<title>Malaria by counties in Kenya - Data exploration</title>
 
 <!-- SlickGrid -->
 <link rel="stylesheet" href="lib/slickgrid/slick.grid.css" type="text/css"/>
@@ -25,7 +25,7 @@ body {
   margin: 30px;
 }
 #parcoords {
-  height:300px;
+  height:350px;
 }
 #map {
   width:400px;
@@ -40,21 +40,53 @@ body {
   font-weight: bold;
   color: #069;
 }
+#sources {
+  clear:both;
+}
 </style>
 <script src="lib/d3.min.js"></script>
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
 <script src="lib/sylvester.js"></script>
 <div id="header">
-  <h1>Malaria prevalence in Kenyan counties - Data exploration<h1/>
+  <h1>Malaria by counties in Kenya - Data exploration<h1/>
+  <a target="_blank" href="https://realimpactanalytics.com">
+    <img style="position: absolute; top: 25px; right: 150px; border: 0; width:200px" src="img/ria.png" alt="Real Impact Analytics"></a>
+  <a target="_blank" href="https://github.com/RealImpactAnalytics/d4g-hackathon-malaria-viz">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="img/forkme.png" alt="Fork me on GitHub"></a>
+</div>
+<div id="explanation">
+  <p>Click and drag along an axis to filter data. Drag the axes titles around to reorder the dimensions.</p>
 </div>
 <div id="parcoords" class="parcoords"></div>
 <div id="map"></div>
 <div id="grid"></div>
-
+<div id="sources">
+  <h2>Data sources</h2>
+  <p>The data sources come from <a target="_blank" href="https://data.hdx.rwlabs.org">The Humanitarian Data Exchange</a>.</p>
+  <ul>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/kenya-county-poverty-rates-estimates-based-on-kihbs-data-for-constituencies-in-2005-6">Poverty Rate</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/d00b1282-36eb-4017-812e-cd1906a0d040">Phisicians Density</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/bed-nets-and-illness-by-county-kenya">% That Slept Under a Bed Net</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/bed-nets-and-illness-by-county-kenya">% That Had a Fever or Malaria</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/bed-nets-and-illness-by-county-kenya">Health Spending Per Person</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/the-kenya-2014-adult-hiv-prevalence-rate-by-county">Total Population</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/kenya-health-facilities-per-county-in-kenya">Number of Facilities</a></li>
+    <li><a target="_blank" href="https://data.hdx.rwlabs.org/dataset/the-kenya-2014-adult-hiv-prevalence-rate-by-county">Adult (15+) HIV prevalence</a></li>
+  </ul>
+  <p>The polygons come from <a href="http://africaopendata.org/">openArica</a> : <a href="http://africaopendata.org/dataset/kenya-counties-json">Kenya counties</a>.</p>
+</div>
+<div>
+  <h2>Software</h2>
+  <p>This data exploration tool relies on the following libraries.</p>
+  <ul>
+    <li><a target="_blank" href="https://github.com/mbostock/d3">D3.js</a></li>
+    <li><a target="_blank" href="https://syntagmatic.github.io/parallel-coordinates/">Parralel Coordinates</a></li>
+    <li><a target="_blank" href="https://github.com/mleibman/SlickGrid">Slick Grid</a></li>
+  </ul>
+</div>
 <script>
 
-// County,Poverty Rate,Physicians Density,% That Slept Under a Bed Net,% That Had a Fever or Malaria,Heath Spending Per Person,Total Population,Number of Facilities,Adult (15+) HIV prevalence
 var dimensions = ['Poverty Rate',
                   'Physicians Density',
                   '% That Slept Under a Bed Net',
@@ -65,29 +97,30 @@ var dimensions = ['Poverty Rate',
                   'Adult (15+) HIV prevalence'];
 
 // linear color scale
-var blue_to_red = d3.scale.linear()
-  .domain([0.2, 0.4, 0.6])
+var blue_to_red = d3.scale.quantize()
+  .domain([0.2, 0.6])
   .range(["blue", "grey", "red"])
-  .interpolate(d3.interpolateLab);
 
 var parcoords = d3.parcoords()("#parcoords")
-  .alpha(0.4)
+  .alpha(0.5)
   .mode("default")
   //.height(d3.max([document.body.clientHeight-326, 220]))
-  .height(300)
+  .height(350)  
   .margin({
-    top: 36,
-    left: 0,
-    right: 0,
+    top: 70,
+    left: 20,
+    right: 20,
     bottom: 16
   })
   .color(function(d) { return blue_to_red(d['% That Had a Fever or Malaria']); })
 
 // create chart from loaded data
 function parallelCoordinates(data) {
+
   // slickgrid needs each data element to have an id
   data.forEach(function(d,i) { d.id = d.id || i; });
 
+  // render parallel coordinates
   parcoords
     .data(data)
     .render()
@@ -98,26 +131,27 @@ function parallelCoordinates(data) {
     .showControlPoints(false)
     .render()
 
-  var svg = d3.select("#map")
+  // axis titles are too long : rotate them a bit
+  d3.select("#parcoords").selectAll(".axis").selectAll("text.label")
+    .attr("transform", "rotate(-15) translate(0, -30)")
 
   var w = 305,
       h = 380;
 
   var projection = d3.geo.mercator()
-     .center([38, 0.5])
-     .scale(2050)
-     .translate([w / 2, h/ 2]);
+    .center([38, 0.5])
+    .scale(2050)
+    .translate([w / 2, h/ 2]);
 
- //Generate SVG element
- var svg = d3.select("#map")
-       .append("svg")
-       .attr("width", w)
-       .attr("height", h)
-       .attr("style", "display: block; margin: auto")
+  // generate SVG map
+  var svg = d3.select("#map")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("style", "display: block; margin: auto")
 
-  //Define path generator
-  var path = d3.geo.path()
-                  .projection(projection);
+  // define path generator
+  var path = d3.geo.path().projection(projection);
 
   function get_data_for_county(county) {
     for (var i = 0; i < data.length; i++) {
@@ -134,6 +168,14 @@ function parallelCoordinates(data) {
       row = brushed_data[i]
       counties.push(row['County'])
     }
+    update_map_with_counties(counties)
+  }
+
+  function update_map_with_row(row) {
+    update_map_with_counties([row['County']])
+  }
+
+  function update_map_with_counties(counties) {
     var county_objects = d3.selectAll(".county")
     var county_objects_selected = county_objects.filter(
       function(d, i) {
@@ -151,26 +193,6 @@ function parallelCoordinates(data) {
     county_objects_not_selected.style('fill-opacity', .7);
   }
 
-  function update_map_with_row(row) {
-    county = row['County'];
-
-    var county_objects = d3.selectAll(".county")
-    var county_objects_selected = county_objects.filter(
-      function(d, i) {
-        county_index = d.properties.COUNTY.toUpperCase()
-        return county_index == county;
-      });
-    
-    var county_objects_not_selected = county_objects.filter(
-      function(d, i) {
-        county_index = d.properties.COUNTY.toUpperCase()
-        return county_index != county;
-      });
-
-    county_objects_selected.style('fill-opacity', 1);
-    county_objects_not_selected.style('fill-opacity', .7);
-  }
-
   function update_map() {
     var parcoords_data = parcoords.brushed() || data;
     update_map_with_brush(parcoords_data);
@@ -180,6 +202,17 @@ function parallelCoordinates(data) {
     parcoords.highlight([row]);
   }
 
+  function update_grid() {
+    var parcoords_data = parcoords.brushed() || data;
+    update_grid_with_data(parcoords_data)
+  };
+
+  function update_grid_with_data(data) {
+    dataView.beginUpdate();
+    dataView.setItems(data);
+    dataView.endUpdate();
+  };
+
   d3.json("data/Kenyan-Counties.geojson", function(json) {
 
     svg.selectAll("path")
@@ -187,24 +220,26 @@ function parallelCoordinates(data) {
       .enter()
       .append("path")
       .attr("d", path)
-      .attr("class", function(d) { return "county " + d.properties.COUNTY; })
+      .attr("class", "county")
       .style("fill", "steelblue")
       .on('mouseover', function(d, i) {
            d3.selectAll(".county").style('fill-opacity', .7);
            d3.select(this).style('fill-opacity', 1);
            row = get_data_for_county(d.properties.COUNTY);
            update_parcoords_with_row(row);
+           update_grid_with_data([row])
        })
       .on('mouseout', function(d, i) {
            parcoords.unhighlight();
            update_map();
+           update_grid();
       });
   });
 
   // highlight map on brush
   parcoords.on("brush", function(d) {
     update_map_with_brush(d);
-    gridUpdate(d);
+    update_grid_with_data(d);
   });
 
   // setting up grid
@@ -272,16 +307,10 @@ function parallelCoordinates(data) {
   });
 
   // fill grid with data
-  gridUpdate(data);
-
-  function gridUpdate(data) {
-    dataView.beginUpdate();
-    dataView.setItems(data);
-    dataView.endUpdate();
-  };
+  update_grid_with_data(data);
 };
 
-function readTextFile(file)
+function loadData(file)
 {
   var rawFile = new XMLHttpRequest();
   rawFile.open("GET", file, false);
@@ -297,10 +326,9 @@ function readTextFile(file)
       }
     }
   }
-    rawFile.send(null);
+  rawFile.send(null);
 }
 
-var file = "data/D4G_MALARIA_EXPLORE_v1.csv";
-lines = readTextFile(file)
+loadData("data/D4G_MALARIA_EXPLORE_v1.csv");
 
 </script>
