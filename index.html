@@ -54,7 +54,7 @@ body {
 <div id="header">
   <h1>Malaria by counties in Kenya - Data exploration<h1/>
   <a target="_blank" href="https://realimpactanalytics.com">
-    <img style="position: absolute; top: 25px; right: 150px; border: 0; width:200px" src="img/ria.png" alt="Real Impact Analytics"></a>
+    <img style="position: absolute; top: 30px; right: 150px; border: 0; width:200px" src="img/ria.png" alt="Real Impact Analytics"></a>
   <a target="_blank" href="https://github.com/RealImpactAnalytics/d4g-hackathon-malaria-viz">
     <img style="position: absolute; top: 0; right: 0; border: 0;" src="img/forkme.png" alt="Fork me on GitHub"></a>
 </div>
@@ -87,15 +87,15 @@ body {
     <li>Weather or rainfall per county</li>
     <li>...</li>
   </ul>
-  <p>The polygons come from <a href="http://africaopendata.org/">openArica</a> : <a href="http://africaopendata.org/dataset/kenya-counties-json">Kenya counties</a>.</p>
+  <p>The polygons come from <a href="http://africaopendata.org/">openAfrica</a> : <a href="http://africaopendata.org/dataset/kenya-counties-json">Kenya counties</a>.</p>
 </div>
 <div id="software">
   <h2>Software</h2>
   <p>This data exploration tool relies on the following libraries.</p>
   <ul>
     <li><a target="_blank" href="https://github.com/mbostock/d3">D3.js</a></li>
-    <li><a target="_blank" href="https://syntagmatic.github.io/parallel-coordinates/">Parralel Coordinates</a></li>
-    <li><a target="_blank" href="https://github.com/mleibman/SlickGrid">Slick Grid</a></li>
+    <li><a target="_blank" href="https://syntagmatic.github.io/parallel-coordinates/">Parallel Coordinates</a></li>
+    <li><a target="_blank" href="https://github.com/mleibman/SlickGrid">SlickGrid</a></li>
   </ul>
 </div>
 <script>
@@ -104,7 +104,7 @@ var data_file = "data/d4g_malaria_explore.csv"
 var polygons_file = "data/Kenyan-Counties.geojson"
 
 var dimensions = ['% That Had a Fever or Malaria',
-                  'Malaria cases',
+                  'Malaria cases per 100k people',
                   'Poverty Rate',
                   'Physicians Density',
                   '% That Slept Under a Bed Net',
