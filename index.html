@@ -19,17 +19,42 @@
 <style>
 body, html {
   margin: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
   font-size: 12px;
 }
+body {
+  margin: 15px 30px;
+}
+#parcoords {
+  height:300px;
+}
+#map {
+  width:400px;
+  float: left
+}
+
+#grid {
+  height: 320px;
+  margin-top: 40px;
+  margin-left: 400px;
+}
+.slick-row:hover {
+  font-weight: bold;
+  color: #069;
+}
+
+
 </style>
 <script src="lib/d3.min.js"></script>
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
 <script src="lib/sylvester.js"></script>
-<div id="example" class="parcoords" style="height:240px;"></div>
+<div id="header">
+  <h1>Malaria prevalence in Kenyan counties - Data exploration<h1/>
+</div>
+<div id="parcoords" class="parcoords"></div>
+<div id="map"></div>
+<div id="grid"></div>
+
 <script>
 
 // County,Poverty Rate,Physicians Density,% That Slept Under a Bed Net,% That Had a Fever or Malaria,Heath Spending Per Person,Total Population,Number of Facilities,Adult (15+) HIV prevalence
@@ -48,11 +73,11 @@ var blue_to_red = d3.scale.linear()
   .range(["blue", "grey", "red"])
   .interpolate(d3.interpolateLab);
 
-var parcoords = d3.parcoords()("#example")
+var parcoords = d3.parcoords()("#parcoords")
   .alpha(0.4)
   .mode("default")
   //.height(d3.max([document.body.clientHeight-326, 220]))
-  .height(350)
+  .height(300)
   .margin({
     top: 36,
     left: 0,
@@ -76,23 +101,26 @@ function parallelCoordinates(data) {
     .showControlPoints(false)
     .render()
 
-  var w = 600,
-      h = 600;
+  var svg = d3.select("#map")
+
+  var w = 305,
+      h = 380;
+
   var projection = d3.geo.mercator()
-     .center([38, 1.5])
+     .center([38, 0.5])
      .scale(2050)
      .translate([w / 2, h/ 2]);
+
+ //Generate SVG element
+ var svg = d3.select("#map")
+       .append("svg")
+       .attr("width", w)
+       .attr("height", h)
+       .attr("style", "display: block; margin: auto")
 
   //Define path generator
   var path = d3.geo.path()
                   .projection(projection);
-
-  //Create SVG element
-  var svg = d3.select("body")
-             .append("svg")
-             .attr("width", w)
-             .attr("height", h)
-             .attr("style", "display: block; margin: auto")
 
   function get_data_for_county(county) {
     for (var i = 0; i < data.length; i++) {
@@ -155,10 +183,9 @@ function parallelCoordinates(data) {
   // highlight map on brush
   parcoords.on("brush", function(d) {
     update_map_with_brush(d);
+    gridUpdate(d);
   });
 
-
-  /*
   // setting up grid
   var column_keys = d3.keys(data[0]);
   var columns = column_keys.map(function(key,i) {
@@ -178,7 +205,6 @@ function parallelCoordinates(data) {
 
   var dataView = new Slick.Data.DataView();
   var grid = new Slick.Grid("#grid", dataView, columns, options);
-  var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
 
   // wire up model events to drive the grid
   dataView.onRowCountChanged.subscribe(function (e, args) {
@@ -225,17 +251,11 @@ function parallelCoordinates(data) {
   // fill grid with data
   gridUpdate(data);
 
-  // update grid on brush
-  parcoords.on("brush", function(d) {
-    gridUpdate(d);
-  });
-
   function gridUpdate(data) {
     dataView.beginUpdate();
     dataView.setItems(data);
     dataView.endUpdate();
   };
-  */
 };
 
 function readTextFile(file)
