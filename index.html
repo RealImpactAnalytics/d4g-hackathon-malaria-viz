@@ -22,7 +22,7 @@ body, html {
   font-size: 12px;
 }
 body {
-  margin: 15px 30px;
+  margin: 30px;
 }
 #parcoords {
   height:300px;
@@ -31,7 +31,6 @@ body {
   width:400px;
   float: left
 }
-
 #grid {
   height: 320px;
   margin-top: 40px;
@@ -41,8 +40,6 @@ body {
   font-weight: bold;
   color: #069;
 }
-
-
 </style>
 <script src="lib/d3.min.js"></script>
 <script src="lib/d3.parcoords.js"></script>
@@ -154,6 +151,35 @@ function parallelCoordinates(data) {
     county_objects_not_selected.style('fill-opacity', .7);
   }
 
+  function update_map_with_row(row) {
+    county = row['County'];
+
+    var county_objects = d3.selectAll(".county")
+    var county_objects_selected = county_objects.filter(
+      function(d, i) {
+        county_index = d.properties.COUNTY.toUpperCase()
+        return county_index == county;
+      });
+    
+    var county_objects_not_selected = county_objects.filter(
+      function(d, i) {
+        county_index = d.properties.COUNTY.toUpperCase()
+        return county_index != county;
+      });
+
+    county_objects_selected.style('fill-opacity', 1);
+    county_objects_not_selected.style('fill-opacity', .7);
+  }
+
+  function update_map() {
+    var parcoords_data = parcoords.brushed() || data;
+    update_map_with_brush(parcoords_data);
+  }
+
+  function update_parcoords_with_row(row) {
+    parcoords.highlight([row]);
+  }
+
   d3.json("data/Kenyan-Counties.geojson", function(json) {
 
     svg.selectAll("path")
@@ -164,19 +190,14 @@ function parallelCoordinates(data) {
       .attr("class", function(d) { return "county " + d.properties.COUNTY; })
       .style("fill", "steelblue")
       .on('mouseover', function(d, i) {
-           var currentState = this;
+           d3.selectAll(".county").style('fill-opacity', .7);
            d3.select(this).style('fill-opacity', 1);
-           var parcoords_data = parcoords.brushed() || data;
-           console.log("Trying to get data of " + d.properties.COUNTY)
-           row = get_data_for_county(d.properties.COUNTY)
-           console.log("Got this : " + row)
-           parcoords.highlight([row]);
+           row = get_data_for_county(d.properties.COUNTY);
+           update_parcoords_with_row(row);
        })
       .on('mouseout', function(d, i) {
-           d3.selectAll(".county").style({'fill-opacity':.7});
-           var parcoords_data = parcoords.brushed() || data;
            parcoords.unhighlight();
-           update_map_with_brush(parcoords_data);
+           update_map();
       });
   });
 
@@ -242,10 +263,12 @@ function parallelCoordinates(data) {
   grid.onMouseEnter.subscribe(function(e,args) {
     var i = grid.getCellFromEvent(e).row;
     var d = parcoords.brushed() || data;
-    parcoords.highlight([d[i]]);
+    update_parcoords_with_row(d[i]);
+    update_map_with_row(d[i]);
   });
   grid.onMouseLeave.subscribe(function(e,args) {
     parcoords.unhighlight();
+    update_map()
   });
 
   // fill grid with data
