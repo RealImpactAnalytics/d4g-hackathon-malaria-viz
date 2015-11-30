@@ -126,7 +126,7 @@
 <c>Number of Facilities</c></after>
 <QuickRename ></QuickRename>
 </ColumnRename>
-<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='458' y='-490' keep='1'>
+<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='575' y='-494' keep='1'>
  <c>County</c>
  <c>Poverty Rate</c>
  <c>Physicians Density</c>
@@ -139,24 +139,27 @@
  <c>Population_density_per_sq_km</c>
  <c>Population</c>
 </SelectColumns>
-<Calculator module='AnatellaPluginMathParser' idx='45' x='323' y='-491'>
+<Calculator module='AnatellaPluginMathParser' idx='45' x='336' y='-500'>
   <InputVars>
     <InputVar column='Poverty Rate' label='Poverty_Rate'/>
     <InputVar column='% That Slept Under a Bed Net' label='__That_Slept_Under_a_Bed_Net'/>
     <InputVar column='% That Had a Fever or Malaria' label='__That_Had_a_Fever_or_Malaria'/>
     <InputVar column='Adult (15+) HIV prevalence' label='Adult__15___HIV_prevalence'/>
-    <InputVar column='Malaria cases (per 100,000 people)' label='Malaria_cases__per_100_000_people_'/>
+    <InputVar column='Malaria cases (per 100,000 people)' label='Malaria_cases__per_100_000_people_' isNumber='0'/>
   </InputVars>
   <OutputVars>
     <OutputVar name='Poverty Rate' update='1'>Poverty_Rate/100</OutputVar>
-    <OutputVar name='Malaria cases (per 100,000 people)' update='1'>Malaria_cases__per_100_000_people_/100000</OutputVar>
+    <OutputVar name='Malaria cases (per 100,000 people)' meta='U' update='1'>strlen(trim(Malaria_cases__per_100_000_people_))==6? left( Malaria_cases__per_100_000_people_ ,2)//right( Malaria_cases__per_100_000_people_ ,3):
+(strlen(trim(Malaria_cases__per_100_000_people_))==5? left( Malaria_cases__per_100_000_people_ ,1)//right( Malaria_cases__per_100_000_people_ ,3):
+trim(Malaria_cases__per_100_000_people_)
+)</OutputVar>
     <OutputVar name='Adult (15+) HIV prevalence' update='1'>Adult__15___HIV_prevalence /100</OutputVar>
     <OutputVar name='% That Slept Under a Bed Net' update='1'>__That_Slept_Under_a_Bed_Net/100</OutputVar>
     <OutputVar name='% That Had a Fever or Malaria' update='1'>__That_Had_a_Fever_or_Malaria/100</OutputVar>
   </OutputVars>
 </Calculator>
-<writeCSV idx='46' x='596' y='-494' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v2.csv'/>
-<RunToFinishLine idx='47' x='740' y='-495'  nPinIn='1'/>
+<writeCSV idx='46' x='690' y='-498' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v2.csv'/>
+<RunToFinishLine idx='47' x='834' y='-499'  nPinIn='1'/>
 <FilterRows module='AnatellaPluginMathParser' idx='49' x='-77' y='-494'>
  <Expression>County!="NATIONAL AVERAGE"</Expression>
  <InputVars>
@@ -283,6 +286,14 @@
 </RegExp>
 <Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
 </Processing></ReplaceStrings>
+<Calculator module='AnatellaPluginMathParser' idx='68' x='456' y='-500'>
+  <InputVars>
+    <InputVar column='Malaria cases (per 100,000 people)' label='Malaria_cases__per_100_000_people_'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='Malaria cases (per 100,000 people)' update='1'> Malaria_cases__per_100_000_people_ /100000</OutputVar>
+  </OutputVars>
+</Calculator>
 </ACTIONS>
 <CONNECTORS>
 <Connection idxSrc='1' idxDest='6'/>
@@ -299,7 +310,6 @@
 <Connection idxSrc='15' idxDest='10' idxPinIn='3'/>
 <Connection idxSrc='42' idxDest='43'/>
 <Connection idxSrc='43' idxDest='10' idxPinIn='4'/>
-<Connection idxSrc='45' idxDest='44'/>
 <Connection idxSrc='44' idxDest='46'/>
 <Connection idxSrc='46' idxDest='47'/>
 <Connection idxSrc='10' idxDest='49'/>
@@ -322,6 +332,8 @@
 <Connection idxSrc='64' idxDest='65'/>
 <Connection idxSrc='65' idxDest='66'/>
 <Connection idxSrc='66' idxDest='10' idxPinIn='6'/>
+<Connection idxSrc='45' idxDest='68'/>
+<Connection idxSrc='68' idxDest='44'/>
 </CONNECTORS>
 <TEXTANNOTATIONS>
 </TEXTANNOTATIONS>
