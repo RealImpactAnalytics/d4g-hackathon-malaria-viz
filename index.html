@@ -18,13 +18,17 @@
 <link rel="stylesheet" type="text/css" href="lib/d3.parcoords.css">
 <link rel="stylesheet" type="text/css" href="lib/style.css">
 <style>
+
 body, html {
   margin: 0;
   font-size: 12px;
+
 }
 body {
   margin: 30px;
+  /*font-family: "Trebuchet MS", Helvetica, sans-serif;*/
 }
+
 #parcoords {
   height:350px;
 }
@@ -50,7 +54,6 @@ body {
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
 <script src="lib/sylvester.js"></script>
-
 <div id="header">
   <h1>Malaria by counties in Kenya - Data exploration<h1/>
   <a target="_blank" href="https://realimpactanalytics.com">
@@ -238,7 +241,7 @@ function parallelCoordinates(data) {
       .append("path")
       .attr("d", path)
       .attr("class", "county")
-      .style("fill", "steelblue")
+      .style("fill", "orange")
       .on('mouseover', function(d, i) {
            d3.selectAll(".county").style('fill-opacity', .7);
            d3.select(this).style('fill-opacity', 1);
