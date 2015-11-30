@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.54'>
+<GlobalParameters wDirLoc='0' dataDirRead=':/' dataDirWrite='C:/'>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAACW/wCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAAA/AAACWwAAAHgA////AAAAAwAAB4AAAAFH/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAARdAAAAUAD////8AAAEYQAAAx8AAADJAP////oAAAABAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAWQD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAAyQD///8AAAZ8AAACWwAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAgL/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAAA6D/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<readCSV idx='0' x='-731' y='-357' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Spending_Per_Capita__By_County.csv'/>
+<readCSV idx='1' x='-737' y='-517' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_PovertyRates.csv'/>
+<readCSV idx='2' x='-730' y='-276' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Keny_Gender_based_HIV_prevalence_per_county.csv'/>
+<readCSV idx='3' x='-728' y='-435' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Physician Density.csv'/>
+<readCSV idx='4' x='-729' y='-188' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Facilities.csv'/>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='6' x='-594' y='-518'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>County</c></Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='7' x='-587' y='-430'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>County</c></Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='8' x='-595' y='-336'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>County</c></Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='9' x='-596' y='-264'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>COUNTY NAME</c></Processing></ReplaceStrings>
+<MultiJoin module='AnatellaPluginsDefaultActions' idx='10' x='-197' y='-489' nPinIn='6'>
+  <Join pin='1' mainKey='County' slaveKey='County' prefix='' copyAll='0'>
+  <c>Physicians Density</c>
+  </Join>
+  <Join pin='2' mainKey='County' slaveKey='County' prefix='' copyAll='0'>
+  <c>% That Slept Under a Bed Net</c><c>% That Had a Fever or Malaria</c><c>Heath Spending Per Person</c>
+  </Join>
+  <Join pin='3' mainKey='County' slaveKey='COUNTY NAME' prefix=''>
+    </Join>
+  <Join pin='4' mainKey='County' slaveKey='County' prefix=''>
+    </Join>
+  <Join pin='5' mainKey='County' slaveKey='Counties' prefix=''>
+    </Join>
+</MultiJoin>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='12' x='-473' y='-436'>
+<Global>
+</Global><String>
+<Group><vars><c>County</c></vars>
+<replacements>
+<r><s>ELGEIYO-MARAKWET</s><d>ELEGEIYO MARAKWET</d></r>
+<r><s>MURANG&apos;A</s><d>MURANGA</d></r>
+<r><s>THARAKA - NITHI</s><d>THARAKA</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='13' x='-473' y='-516'>
+<Global>
+</Global><String>
+<Group><vars><c>County</c></vars>
+<replacements>
+<r><s>TAITA / TAVETA</s><d>TAITA TAVETA</d></r>
+<r><s>TRANS-NZOIA</s><d>TRANS NZOIA</d></r>
+<r><s>KENYA AVERAGE</s><d>NATIONAL AVERAGE</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='14' x='-479' y='-346'>
+<Global>
+</Global><String>
+<Group><vars><c>County</c></vars>
+<replacements>
+<r><s>ELGEYO/MARAKWET</s><d>ELEGEIYO MARAKWET</d></r>
+<r><s>MURANG&apos;A</s><d>MURANGA</d></r>
+<r><s>THARAKA NITHI</s><d>THARAKA</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='15' x='-471' y='-256'>
+<Global>
+</Global><String>
+<Group><vars><c>COUNTY NAME</c></vars>
+<replacements>
+<r><s>ELEGEYO-MARAKWET</s><d>ELEGEIYO MARAKWET</d></r>
+<r><s>MURANG&apos;A</s><d>MURANGA</d></r>
+<r><s>THARAKA - NITHI</s><d>THARAKA</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<writeExcel module='AnatellaPluginWriteReport' idx='16' x='62' y='-496' fileNameDestination='HDX_Data_Kenya_County_v1.xlsx'/>
+<aggregate idx='42' x='-261' y='-185' inRAMAlgo='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='County' type='0'/>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+ <OneAggregate>
+  <GroupBy>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<ColumnRename module='AnatellaPluginsDefaultActions' idx='43' x='-139' y='-184'><before>
+<c>count</c></before><after>
+<c>Number of Facilities</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='458' y='-490' keep='1'>
+ <c>County</c>
+ <c>Poverty Rate</c>
+ <c>Physicians Density</c>
+ <c>% That Slept Under a Bed Net</c>
+ <c>% That Had a Fever or Malaria</c>
+ <c>Heath Spending Per Person</c>
+ <c>Total Population</c>
+ <c>Number of Facilities</c>
+ <c>Adult (15+) HIV prevalence</c>
+</SelectColumns>
+<Calculator module='AnatellaPluginMathParser' idx='45' x='323' y='-491'>
+  <InputVars>
+    <InputVar column='Poverty Rate' label='Poverty_Rate'/>
+    <InputVar column='% That Slept Under a Bed Net' label='__That_Slept_Under_a_Bed_Net'/>
+    <InputVar column='% That Had a Fever or Malaria' label='__That_Had_a_Fever_or_Malaria'/>
+    <InputVar column='Adult (15+) HIV prevalence' label='Adult__15___HIV_prevalence'/>
+    <InputVar column='Malaria cases (per 100,000 people)' label='Malaria_cases__per_100_000_people_'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='Poverty Rate' update='1'>Poverty_Rate/100</OutputVar>
+    <OutputVar name='Malaria cases (per 100,000 people)' update='1'>Malaria_cases__per_100_000_people_</OutputVar>
+    <OutputVar name='Adult (15+) HIV prevalence' update='1'>Adult__15___HIV_prevalence /100</OutputVar>
+    <OutputVar name='% That Slept Under a Bed Net' update='1'>__That_Slept_Under_a_Bed_Net/100</OutputVar>
+    <OutputVar name='% That Had a Fever or Malaria' update='1'>__That_Had_a_Fever_or_Malaria/100</OutputVar>
+  </OutputVars>
+</Calculator>
+<writeCSV idx='46' x='596' y='-494' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v1.csv'/>
+<RunToFinishLine idx='47' x='740' y='-495'  nPinIn='1'/>
+<FilterRows keyHD='144872807827568720' module='AnatellaPluginMathParser' idx='49' x='-77' y='-494'>
+ <Expression>County!="NATIONAL AVERAGE"</Expression>
+ <InputVars>
+    <InputVar column='County' isNumber='0'/>
+ </InputVars>
+</FilterRows>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='50' x='-597' y='-177'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>County</c></Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='52' x='-388' y='-175'>
+<Global>
+</Global><String>
+<Group><vars><c>County</c></vars>
+<replacements>
+<r><s>TAITA / TAVETA</s><d>TAITA TAVETA</d></r>
+<r><s>TRANS-NZOIA</s><d>TRANS NZOIA</d></r>
+<r><s>KENYA AVERAGE</s><d>NATIONAL AVERAGE</d></r>
+<r><s>ELEGEYO-MARAKWET</s><d>ELEGEIYO MARAKWET</d></r>
+<r><s>MURANG&apos;A</s><d>MURANGA</d></r>
+<r><s>THARAKA - NITHI</s><d>THARAKA</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<readCSV idx='53' x='-723' y='-79' sep=',' fillInEOL='0' fileName=':/D4G_malaria_Kenya_MalariaCasePer100000.csv'/>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='54' x='-588' y='-76'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>Counties</c></Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='55' x='-449' y='-79'>
+<Global>
+</Global><String>
+<Group><vars><c>Counties</c></vars>
+<replacements>
+<r><s>TAITA / TAVETA</s><d>TAITA TAVETA</d></r>
+<r><s>TRANS-NZOIA</s><d>TRANS NZOIA</d></r>
+<r><s>KENYA AVERAGE</s><d>NATIONAL AVERAGE</d></r>
+<r><s>ELGEIYO-MARAKWET</s><d>ELEGEIYO MARAKWET</d></r>
+<r><s>MURANG&apos;A</s><d>MURANGA</d></r>
+<r><s>THARAKA - NITHI</s><d>THARAKA</d></r>
+</replacements></Group>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='0' simplify='0' capitalize='0' lowercase='0' unAccent='0' removeFirst='0' removeLast='0' truncate='0'>
+</Processing></ReplaceStrings>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='56' x='197' y='-499'>
+<Global>
+</Global><String>
+</String><RegExp>
+</RegExp>
+<Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
+<c>Malaria cases (per 100,000 people)</c></Processing></ReplaceStrings>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='1' idxDest='6'/>
+<Connection idxSrc='3' idxDest='7'/>
+<Connection idxSrc='0' idxDest='8'/>
+<Connection idxSrc='2' idxDest='9'/>
+<Connection idxSrc='7' idxDest='12'/>
+<Connection idxSrc='12' idxDest='10' idxPinIn='1'/>
+<Connection idxSrc='6' idxDest='13'/>
+<Connection idxSrc='13' idxDest='10'/>
+<Connection idxSrc='8' idxDest='14'/>
+<Connection idxSrc='14' idxDest='10' idxPinIn='2'/>
+<Connection idxSrc='9' idxDest='15'/>
+<Connection idxSrc='15' idxDest='10' idxPinIn='3'/>
+<Connection idxSrc='42' idxDest='43'/>
+<Connection idxSrc='43' idxDest='10' idxPinIn='4'/>
+<Connection idxSrc='45' idxDest='44'/>
+<Connection idxSrc='44' idxDest='46'/>
+<Connection idxSrc='46' idxDest='47'/>
+<Connection idxSrc='10' idxDest='49'/>
+<Connection idxSrc='49' idxDest='16'/>
+<Connection idxSrc='4' idxDest='50'/>
+<Connection idxSrc='52' idxDest='42'/>
+<Connection idxSrc='50' idxDest='52'/>
+<Connection idxSrc='53' idxDest='54'/>
+<Connection idxSrc='54' idxDest='55'/>
+<Connection idxSrc='55' idxDest='10' idxPinIn='5'/>
+<Connection idxSrc='16' idxDest='56'/>
+<Connection idxSrc='56' idxDest='45'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>
