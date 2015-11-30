@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ANATELLA version='1.54'>
-<GlobalParameters wDirLoc='0' dataDirRead=':/' dataDirWrite='C:/'>
+<GlobalParameters wDirLoc='0' dataDirRead=':/' dataDirWrite=':/'>
 </GlobalParameters>
-<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAACFPwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAAA/AAACFAAAAHgA////AAAAAwAAB4AAAAGO/AEAAAAB/AAAAAAAAAeAAAACNgD////6AAAAAAEAAAAD+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAD/////AAACNgD////7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAWQD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAAyQD///8AAAZ8AAACFAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAgL/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAAA6D/////AAAAAAAAAAA=</WorkingSpace>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAACFPwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAAA/AAACFAAAAHgA////AAAAAwAAB4AAAAGO/AEAAAAB/AAAAAAAAAeAAAACNgD////6AAAAAQEAAAAD+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAD/////AAACNgD////7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAWQD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAAyQD///8AAAZ8AAACFAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAgL/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAAA6D/////AAAAAAAAAAA=</WorkingSpace>
 <ACTIONS>
-<readCSV keyHD='144892310627568916' idx='0' x='-731' y='-357' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Spending_Per_Capita__By_County.csv'/>
-<readCSV keyHD='144892310227568573' idx='1' x='-737' y='-517' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_PovertyRates.csv'/>
-<readCSV keyHD='144892310927568992' idx='2' x='-730' y='-276' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Keny_Gender_based_HIV_prevalence_per_county.csv'/>
-<readCSV keyHD='144892310527568101' idx='3' x='-728' y='-435' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Physician Density.csv'/>
+<readCSV idx='0' x='-731' y='-357' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Spending_Per_Capita__By_County.csv'/>
+<readCSV idx='1' x='-737' y='-517' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_PovertyRates.csv'/>
+<readCSV idx='2' x='-730' y='-276' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Keny_Gender_based_HIV_prevalence_per_county.csv'/>
+<readCSV idx='3' x='-728' y='-435' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Physician Density.csv'/>
 <readCSV idx='4' x='-729' y='-188' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Facilities.csv'/>
 <ReplaceStrings module='AnatellaPluginsDefaultActions' idx='6' x='-594' y='-518'>
 <Global>
@@ -37,7 +37,7 @@
 </RegExp>
 <Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
 <c>COUNTY NAME</c></Processing></ReplaceStrings>
-<MultiJoin keyHD='144892172027568586' module='AnatellaPluginsDefaultActions' idx='10' x='-202' y='-505' nPinIn='7'>
+<MultiJoin module='AnatellaPluginsDefaultActions' idx='10' x='-202' y='-505' nPinIn='7'>
   <Join pin='1' mainKey='County' slaveKey='County' prefix='' copyAll='0'>
   <c>Physicians Density</c>
   </Join>
@@ -126,7 +126,7 @@
 <c>Number of Facilities</c></after>
 <QuickRename ></QuickRename>
 </ColumnRename>
-<SelectColumns keyHD='144892231327568320' module='AnatellaPluginsDefaultActions' idx='44' x='458' y='-490' keep='1'>
+<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='458' y='-490' keep='1'>
  <c>County</c>
  <c>Poverty Rate</c>
  <c>Physicians Density</c>
@@ -135,6 +135,7 @@
  <c>Heath Spending Per Person</c>
  <c>Number of Facilities</c>
  <c>Adult (15+) HIV prevalence</c>
+ <c>Malaria cases (per 100,000 people)</c>
  <c>Population_density_per_sq_km</c>
  <c>Population</c>
 </SelectColumns>
@@ -148,13 +149,13 @@
   </InputVars>
   <OutputVars>
     <OutputVar name='Poverty Rate' update='1'>Poverty_Rate/100</OutputVar>
-    <OutputVar name='Malaria cases (per 100,000 people)' update='1'>Malaria_cases__per_100_000_people_</OutputVar>
+    <OutputVar name='Malaria cases (per 100,000 people)' update='1'>Malaria_cases__per_100_000_people_/100000</OutputVar>
     <OutputVar name='Adult (15+) HIV prevalence' update='1'>Adult__15___HIV_prevalence /100</OutputVar>
     <OutputVar name='% That Slept Under a Bed Net' update='1'>__That_Slept_Under_a_Bed_Net/100</OutputVar>
     <OutputVar name='% That Had a Fever or Malaria' update='1'>__That_Had_a_Fever_or_Malaria/100</OutputVar>
   </OutputVars>
 </Calculator>
-<writeCSV idx='46' x='596' y='-494' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v1.csv'/>
+<writeCSV idx='46' x='596' y='-494' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v2.csv'/>
 <RunToFinishLine idx='47' x='740' y='-495'  nPinIn='1'/>
 <FilterRows module='AnatellaPluginMathParser' idx='49' x='-77' y='-494'>
  <Expression>County!="NATIONAL AVERAGE"</Expression>
@@ -216,7 +217,7 @@
 </RegExp>
 <Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
 <c>Malaria cases (per 100,000 people)</c></Processing></ReplaceStrings>
-<readCSV keyHD='144892337927568320' idx='57' x='-719' y='9' sep=',' fillInEOL='0' fileName=':/kenya-population-per-county.csv'/>
+<readCSV idx='57' x='-719' y='9' sep=',' fillInEOL='0' fileName=':/kenya-population-per-county.csv'/>
 <readCSV idx='58' x='-730' y='91' sep=',' fillInEOL='0' fileName=':/kenya-surface-area-per-county.csv'/>
 <FilterRows module='AnatellaPluginMathParser' idx='59' x='-572' y='10'>
  <Expression>Country == "Kenya"</Expression>
@@ -255,18 +256,18 @@
     <OutputVar name='Population_density_per_sq_km'>Population / Surface_area__sq__km_</OutputVar>
   </OutputVars>
 </Calculator>
-<SelectColumns keyHD='144892170827568765' module='AnatellaPluginsDefaultActions' idx='64' x='78' y='46' keep='0'>
+<SelectColumns module='AnatellaPluginsDefaultActions' idx='64' x='78' y='46' keep='0'>
  <c>Surface area (sq. km)</c>
  <c>Country</c>
 </SelectColumns>
-<ReplaceStrings keyHD='144892171227568585' module='AnatellaPluginsDefaultActions' idx='65' x='208' y='46'>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='65' x='208' y='46'>
 <Global>
 </Global><String>
 </String><RegExp>
 </RegExp>
 <Processing punctuation='1' simplify='1' capitalize='1' lowercase='0' unAccent='1' removeFirst='0' removeLast='0' truncate='0'>
 <c>Counties</c></Processing></ReplaceStrings>
-<ReplaceStrings keyHD='144892171527568840' module='AnatellaPluginsDefaultActions' idx='66' x='328' y='47'>
+<ReplaceStrings module='AnatellaPluginsDefaultActions' idx='66' x='328' y='47'>
 <Global>
 </Global><String>
 <Group><vars><c>Counties</c></vars>
