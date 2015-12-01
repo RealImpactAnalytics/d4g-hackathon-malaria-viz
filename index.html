@@ -108,6 +108,7 @@ var main_parcoords_alpha = 0.6
 
 var parcoords = d3.parcoords()("#parcoords")
   .alpha(main_parcoords_alpha)
+  .alphaOnBrushed(0.2)
   .mode("default")
   //.height(d3.max([document.body.clientHeight-326, 220]))
   .height(350)  
