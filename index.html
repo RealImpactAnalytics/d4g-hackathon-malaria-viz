@@ -216,7 +216,7 @@ function parallelCoordinates(data) {
       });
 
     county_objects_selected.style('fill-opacity', 1);
-    county_objects_not_selected.style('fill-opacity', .7);
+    county_objects_not_selected.style('fill-opacity', .5);
   }
 
   function update_map() {
@@ -247,9 +247,9 @@ function parallelCoordinates(data) {
       .append("path")
       .attr("d", path)
       .attr("class", "county")
-      .style("fill", "orange")
+      .style("fill", "darkorange")
       .on('mouseover', function(d, i) {
-           d3.selectAll(".county").style('fill-opacity', .7);
+           d3.selectAll(".county").style('fill-opacity', .5);
            d3.select(this).style('fill-opacity', 1);
            row = get_data_for_county(d.properties.COUNTY);
            update_parcoords_with_row(row);
