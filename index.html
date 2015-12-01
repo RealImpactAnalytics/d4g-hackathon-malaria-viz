@@ -122,6 +122,19 @@ var dimensions = ['% That Had a Fever or Malaria',
                   'HIV prevalence',
                   'Population'];
 
+var grid_columns_widths = {
+  'County' : 150,
+  '% That Had a Fever or Malaria // 2006' : 220,
+  'Malaria cases per 100k people // 2013' : 220,
+  'Poverty Rate' : 110,
+  'Physicians Density' : 150,
+  '% That Slept Under a Bed Net' : 210,
+  'Health Spending Per Person' : 200,
+  'Number of Facilities' : 150,
+  'HIV prevalence' : 120,
+  'Population' : 100
+}
+
 // linear color scale
 var blue_to_red = d3.scale.quantize()
   .domain([0.2, 0.6])
@@ -279,14 +292,16 @@ function parallelCoordinates(data) {
       id: key,
       name: key,
       field: key,
-      sortable: true
+      sortable: true,
+      width: grid_columns_widths[key]
     }
   });
 
   var options = {
     enableCellNavigation: true,
     enableColumnReorder: false,
-    multiColumnSort: false
+    multiColumnSort: false,
+    //forceFitColumns: true
   };
 
   var dataView = new Slick.Data.DataView();
