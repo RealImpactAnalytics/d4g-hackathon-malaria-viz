@@ -69,3 +69,7 @@ ul li:before {
   width: 400px;
   margin-left: 500px;
 }
+#footer {
+  clear: both;
+  height: 30px;
+}
