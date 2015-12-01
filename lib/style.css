@@ -5,45 +5,67 @@ body {
   background: #fcfcfc;
   line-height: 1.45em;
 }
+
+/* Slick Grid */
+.slick-row:hover {
+  font-weight: bold;
+}
+.ui-widget {
+  font-size: 1em;
+}
+
+/* Page itself */
+.clear {
+  clear: both;
+}
+
+#header h2 {
+  margin-top: 0;
+  color:darkorange;
+}
+
 a {
   color: #555;
 }
 a:hover {
   color: #000;
 }
-ul {
-  margin: 0 20px;
-  padding: 0;
+
+ul li { list-style:none; }
+ul li:before {
+  content:"\2022";
+  color: darkorange;
+  font-size:1.5em;
+  padding-right:.5em;
+  position:relative;
+  top:.15em;
 }
-.dark {
-  background: #222;
-}
-p {
-  width: 560px;
-}
-pre {
-  color: #444;
-  font-family: Ubuntu Mono, Monaco, monospace;
-  padding: 4px 8px;
-  background: #f2f2f2;
-  border: 1px solid #ccc;
-}
-h1 small {
-  font-weight: normal;
-  font-size: 0.5em;
-}
-h3 {
-  margin-top: 40px;
-}
-.float {
+
+#explanation {
+  width: 700px;
   float: left;
 }
-.centered {
-  text-align: center;
+#parcoords {
+  margin-top: 100px;
+  height:350px;
+  clear: both;
 }
-.hide {
-  display: none;
+#map {
+  width:400px;
+  float: left;
 }
-input {
-  font-size: 16px;
+#grid {
+  height: 320px;
+  margin-top: 40px;
+  margin-left: 400px;
+}
+#sources {
+  /*background-color: green;*/
+  width: 400px;
+  float: left;
+}
+#software {
+  /*background-color: red;*/
+  width: 400px;
+  margin-left: 500px;
 }

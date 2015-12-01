@@ -4,7 +4,6 @@
 <!-- SlickGrid -->
 <link rel="stylesheet" href="lib/slickgrid/slick.grid.css" type="text/css"/>
 <link rel="stylesheet" href="lib/slickgrid/jquery-ui-1.8.16.custom.css" type="text/css"/>
-<link rel="stylesheet" href="lib/slickgrid/examples.css" type="text/css"/>
 <link rel="stylesheet" href="lib/slickgrid/slick.pager.css" type="text/css"/>
 <script src="lib/slickgrid/jquery-1.7.min.js"></script>
 <script src="lib/slickgrid/jquery.event.drag-2.0.min.js"></script>
@@ -17,52 +16,14 @@
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="stylesheet" type="text/css" href="lib/d3.parcoords.css">
 <link rel="stylesheet" type="text/css" href="lib/style.css">
-<style>
-
-body, html {
-  margin: 0;
-  font-size: 12px;
-
-}
-body {
-  margin: 30px;
-  /*font-family: "Trebuchet MS", Helvetica, sans-serif;*/
-}
-
-p, li {
-  font-size: 14px;
-  width: 700px;
-}
-
-#parcoords {
-  margin-top: 20px;
-  height:350px;
-}
-#map {
-  width:400px;
-  float: left
-}
-#grid {
-  height: 320px;
-  margin-top: 40px;
-  margin-left: 400px;
-}
-.slick-row:hover {
-  font-weight: bold;
-  color: #069;
-}
-#sources, #software {
-  clear:both;
-  margin:auto;
-}
-</style>
 <script src="lib/d3.min.js"></script>
 <script src="lib/d3-legend.js"></script>
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
 <script src="lib/sylvester.js"></script>
 <div id="header">
-  <h1>Malaria by counties in Kenya - Data exploration<h1/>
+  <h1>Malaria Data Exploration<h1/>
+  <h2>Kenya counties in 2006 - 2013</h2>
   <a target="_blank" href="https://realimpactanalytics.com">
     <img style="position: absolute; top: 30px; right: 150px; border: 0; width:200px" src="img/ria.png" alt="Real Impact Analytics"></a>
   <a target="_blank" href="https://github.com/RealImpactAnalytics/d4g-hackathon-malaria-viz">
@@ -77,6 +38,7 @@ p, li {
 <div id="parcoords" class="parcoords"></div>
 <div id="map"></div>
 <div id="grid"></div>
+<div class="clear"></div>
 <div id="sources">
   <h2>Data sources</h2>
   <p>The data sources come from the <a target="_blank" href="https://data.hdx.rwlabs.org">Humanitarian Data Exchange</a>.</p>
@@ -95,7 +57,6 @@ p, li {
   <p>We are looking for</p>
   <ul>
     <li>Weather or rainfall per county</li>
-    <li>...</li>
   </ul>
   <p>The polygons come from <a href="http://africaopendata.org/">openAfrica</a> : <a href="http://africaopendata.org/dataset/kenya-counties-json">Kenya counties</a>.</p>
 </div>
