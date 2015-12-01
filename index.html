@@ -306,7 +306,8 @@ function parallelCoordinates(data) {
       name: key,
       field: key,
       sortable: true,
-      width: grid_columns_widths[key]
+      minWidth: 70
+      //width: grid_columns_widths[key]
     }
   });
 
@@ -314,7 +315,7 @@ function parallelCoordinates(data) {
     enableCellNavigation: true,
     enableColumnReorder: false,
     multiColumnSort: false,
-    //forceFitColumns: true
+    forceFitColumns: true
   };
 
   var dataView = new Slick.Data.DataView();
