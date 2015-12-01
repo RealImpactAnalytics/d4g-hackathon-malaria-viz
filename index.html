@@ -57,6 +57,7 @@ p, li {
 }
 </style>
 <script src="lib/d3.min.js"></script>
+<script src="lib/d3-legend.js"></script>
 <script src="lib/d3.parcoords.js"></script>
 <script src="lib/divgrid.js"></script>
 <script src="lib/sylvester.js"></script>
@@ -139,18 +140,20 @@ var color_column = '% That Had a Fever or Malaria // 2006'
 
 // linear color scale
 var blue_to_red = d3.scale.quantize()
-  .domain([0.2, 0.6])
+  .domain([0, 0.75])
   .range(["blue", "grey", "red"])
 
+var main_parcoords_alpha = 0.6
+
 var parcoords = d3.parcoords()("#parcoords")
-  .alpha(0.5)
+  .alpha(main_parcoords_alpha)
   .mode("default")
   //.height(d3.max([document.body.clientHeight-326, 220]))
   .height(350)  
   .margin({
     top: 70,
-    left: 35,
-    right: 20,
+    left: 110,
+    right: 0,
     bottom: 16
   })
   .color(function(d) { return blue_to_red(d[color_column]); })
@@ -190,6 +193,37 @@ function parallelCoordinates(data) {
 
   // break it two if you find " // " in it
   d3.select("#parcoords").selectAll(".axis").selectAll("text.label").each(insertLinebreaks);
+
+  // add legend
+  legend = d3.legend.color()
+    .scale(blue_to_red)
+    .ascending(true)
+    .labels(["00% to 25%", "25% to 50%", "50% to 75%"])
+
+  d3.select("#parcoords svg")
+    .append("g")
+    .attr("class","legend")
+    .attr("transform","translate(25,190)")
+    .style("font-size","12px")
+    .call(legend);
+
+  d3.select(".legend")
+    .append("text")
+    .text("Fever or")
+    .attr("transform", "translate(0,-40)")
+
+  d3.select(".legend")
+    .append("text")
+    .text("Malaria cases")
+    .attr("transform", "translate(0,-25)")
+
+  d3.select(".legend")
+    .append("text")
+    .text("(% of pop, 2006)")
+    .attr("transform", "translate(0,-10)")
+
+  d3.select(".legend").selectAll("rect")
+    .attr("fill-opacity",main_parcoords_alpha)
 
   var w = 305,
       h = 380;
