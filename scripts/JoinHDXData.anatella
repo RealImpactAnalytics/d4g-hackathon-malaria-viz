@@ -2,7 +2,7 @@
 <ANATELLA version='1.54'>
 <GlobalParameters wDirLoc='0' dataDirRead=':/' dataDirWrite=':/'>
 </GlobalParameters>
-<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAACFPwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAAA/AAACFAAAAHgA////AAAAAwAAB4AAAAGO/AEAAAAB/AAAAAAAAAeAAAACNgD////6AAAAAQEAAAAD+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAD/////AAACNgD////7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAWQD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAAyQD///8AAAZ8AAACFAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAgL/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAAA6D/////AAAAAAAAAAA=</WorkingSpace>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAACFPwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAAA/AAACFAAAAHgA////AAAAAwAAB4AAAAGO/AEAAAAB/AAAAAAAAAeAAAAB0gD////6AAAAAQEAAAAD+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAD/////AAAB0gD////7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAWQD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAAyQD///8AAAZ8AAACFAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAgL/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAAA6D/////AAAAAAAAAAA=</WorkingSpace>
 <ACTIONS>
 <readCSV idx='0' x='-731' y='-357' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_Health_Spending_Per_Capita__By_County.csv'/>
 <readCSV idx='1' x='-737' y='-517' sep=',' fillInEOL='0' fileName=':/D4G_Malaria_Kenya_PovertyRates.csv'/>
@@ -126,7 +126,7 @@
 <c>Number of Facilities</c></after>
 <QuickRename ></QuickRename>
 </ColumnRename>
-<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='575' y='-494' keep='1'>
+<SelectColumns module='AnatellaPluginsDefaultActions' idx='44' x='585' y='-509' keep='1'>
  <c>County</c>
  <c>Poverty Rate</c>
  <c>Physicians Density</c>
@@ -134,7 +134,6 @@
  <c>% That Had a Fever or Malaria</c>
  <c>Heath Spending Per Person</c>
  <c>Number of Facilities</c>
- <c>Adult (15+) HIV prevalence</c>
  <c>Malaria cases (per 100,000 people)</c>
  <c>Population_density_per_sq_km</c>
  <c>Population</c>
@@ -158,8 +157,8 @@ trim(Malaria_cases__per_100_000_people_)
     <OutputVar name='% That Had a Fever or Malaria' update='1'>__That_Had_a_Fever_or_Malaria/100</OutputVar>
   </OutputVars>
 </Calculator>
-<writeCSV idx='46' x='690' y='-498' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v2.csv'/>
-<RunToFinishLine idx='47' x='834' y='-499'  nPinIn='1'/>
+<writeCSV idx='46' x='813' y='-497' sep=',' segmentSize='0.1' filename=':/D4G_MALARIA_EXPLORE_v3.csv'/>
+<RunToFinishLine idx='47' x='947' y='-498'  nPinIn='1'/>
 <FilterRows module='AnatellaPluginMathParser' idx='49' x='-77' y='-494'>
  <Expression>County!="NATIONAL AVERAGE"</Expression>
  <InputVars>
@@ -291,9 +290,14 @@ trim(Malaria_cases__per_100_000_people_)
     <InputVar column='Malaria cases (per 100,000 people)' label='Malaria_cases__per_100_000_people_'/>
   </InputVars>
   <OutputVars>
-    <OutputVar name='Malaria cases (per 100,000 people)' update='1'> Malaria_cases__per_100_000_people_ /100000</OutputVar>
+    <OutputVar name='Malaria cases (per 100,000 people)' update='1'>Malaria_cases__per_100_000_people_ /100000</OutputVar>
   </OutputVars>
 </Calculator>
+<ColumnRename module='AnatellaPluginsDefaultActions' idx='70' x='698' y='-497'><before>
+<c>County</c><c>Poverty Rate</c><c>Physicians Density</c><c>% That Slept Under a Bed Net</c><c>% That Had a Fever or Malaria</c><c>Heath Spending Per Person</c><c>Number of Facilities</c><c>Malaria cases (per 100,000 people)</c><c>Population_density_per_sq_km</c><c>Population</c></before><after>
+<c>County</c><c>Poverty Rate // 2005</c><c>Physician density // 2013</c><c>Slept Under a Bed Net (%) // 2006</c><c>Fever or Malaria cases (%) // 2006</c><c>Govt. Health Spending (per pers.) // 2006</c><c>Health Facilites // 2007</c><c>Malaria cases (%) // 2013</c><c>Population density (per km2) // 2011</c><c>Population // 2011</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
 </ACTIONS>
 <CONNECTORS>
 <Connection idxSrc='1' idxDest='6'/>
@@ -310,7 +314,6 @@ trim(Malaria_cases__per_100_000_people_)
 <Connection idxSrc='15' idxDest='10' idxPinIn='3'/>
 <Connection idxSrc='42' idxDest='43'/>
 <Connection idxSrc='43' idxDest='10' idxPinIn='4'/>
-<Connection idxSrc='44' idxDest='46'/>
 <Connection idxSrc='46' idxDest='47'/>
 <Connection idxSrc='10' idxDest='49'/>
 <Connection idxSrc='49' idxDest='16'/>
@@ -334,6 +337,8 @@ trim(Malaria_cases__per_100_000_people_)
 <Connection idxSrc='66' idxDest='10' idxPinIn='6'/>
 <Connection idxSrc='45' idxDest='68'/>
 <Connection idxSrc='68' idxDest='44'/>
+<Connection idxSrc='44' idxDest='70'/>
+<Connection idxSrc='70' idxDest='46'/>
 </CONNECTORS>
 <TEXTANNOTATIONS>
 </TEXTANNOTATIONS>
