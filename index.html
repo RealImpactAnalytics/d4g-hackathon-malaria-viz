@@ -73,30 +73,17 @@
 var data_file = "data/d4g_malaria_explore.csv"
 var polygons_file = "data/Kenyan-Counties.geojson"
 
-var dimensions = ['% That Had a Fever or Malaria // 2006',
-                  'Malaria cases per 100k people // 2013',
-                  'Poverty Rate',
-                  'Physicians Density',
-                  '% That Slept Under a Bed Net',
-                  'Health Spending Per Person',
-                  'Number of Facilities',
-                  'HIV prevalence',
-                  'Population'];
+var dimensions = ['Fever or Malaria cases (%) // 2006',
+                  'Malaria cases (%) // 2013',
+                  'Poverty Rate // 2005',
+                  'Physician density // 2013',
+                  'Slept Under a Bed Net (%) // 2006',
+                  'Govt. Health Spending (per pers.) // 2006',
+                  'Health Facilites // 2007',
+                  'Population density (per km^2) // 2011',
+                  'Population // 2011'];
 
-var grid_columns_widths = {
-  'County' : 150,
-  '% That Had a Fever or Malaria // 2006' : 220,
-  'Malaria cases per 100k people // 2013' : 220,
-  'Poverty Rate' : 110,
-  'Physicians Density' : 150,
-  '% That Slept Under a Bed Net' : 210,
-  'Health Spending Per Person' : 200,
-  'Number of Facilities' : 150,
-  'HIV prevalence' : 120,
-  'Population' : 100
-}
-
-var color_column = '% That Had a Fever or Malaria // 2006'
+var color_column = 'Fever or Malaria cases (%) // 2006'
 
 // linear color scale
 var blue_to_red = d3.scale.quantize()
@@ -306,7 +293,6 @@ function parallelCoordinates(data) {
       field: key,
       sortable: true,
       minWidth: 70
-      //width: grid_columns_widths[key]
     }
   });
 
