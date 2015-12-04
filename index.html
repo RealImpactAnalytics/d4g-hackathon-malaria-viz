@@ -34,6 +34,9 @@
     Each line represents a county. They are colored by percentage of people that had fever or malaria in 2006.<br />
     Click and drag along an axis to filter data. Drag the axes titles around to reorder the dimensions. Explore!
   </p>
+  <p>
+    For example, you can drag the Poverty Rate axis next to the Fever or Malaria column and then filter on the Fever or Malaria axis to check for correlations. While you filter and move the filter along the axis, you can also observe the selected counties on the map.
+  </p>
 </div>
 <div id="parcoords" class="parcoords"></div>
 <div id="map"></div>
@@ -80,8 +83,9 @@ var dimensions = ['Fever or Malaria cases (%) // 2006',
                   'Slept Under a Bed Net (%) // 2006',
                   'Govt. Health Spending (per pers.) // 2006',
                   'Health Facilites // 2007',
-                  'Population density (per km^2) // 2011',
-                  'Population // 2011'];
+                  //'Population density (per km^2) // 2011',
+                  //'Population // 2011'
+                  ];
 
 var color_column = 'Fever or Malaria cases (%) // 2006'
 
