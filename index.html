@@ -172,12 +172,12 @@ function parallelCoordinates(data) {
   d3.select(".legend").selectAll("rect")
     .attr("fill-opacity",main_parcoords_alpha)
 
-  var w = 305,
-      h = 380;
+  var w = 355,
+      h = 420;
 
   var projection = d3.geo.mercator()
     .center([38, 0.5])
-    .scale(2050)
+    .scale(2200)
     .translate([w / 2, h/ 2]);
 
   // generate SVG map

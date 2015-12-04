@@ -51,13 +51,13 @@ ul li:before {
   clear: both;
 }
 #map {
-  width:400px;
+  width:450px;
   float: left;
 }
 #grid {
   height: 320px;
   margin-top: 40px;
-  margin-left: 400px;
+  margin-left: 450px;
 }
 #sources {
   /*background-color: green;*/
