@@ -265,7 +265,7 @@ function parallelCoordinates(data) {
       .attr("class", "county")
       .style("fill", "darkorange")
       .style("stroke", "#fcfcfc")
-      .style("stroke-width", "0.5px")
+      .style("stroke-width", "1px")
       .on('mouseover', function(d, i) {
            d3.selectAll(".county").style('fill-opacity', .5);
            d3.select(this).style('fill-opacity', 1);
